@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "nodemon server"
   },
+  "prisma": {
+    "seed": "node prisma\\seed.js"
+  },
   "author": "Adem",
   "license": "ISC",
   "dependencies": {
