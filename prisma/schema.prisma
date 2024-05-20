@@ -33,11 +33,11 @@ model Type {
 model Config {
 	id              Int      @id @default(autoincrement())
 	name            String   @unique
-	period          String
+	period          String?
 	speed           String?
   bounding_box_x  String
   bounding_box_y  String
-	pixels          Json
+	pixels          String
   type            Type     @relation(fields: [typeId], references: [id])
   typeId          Int
 }
