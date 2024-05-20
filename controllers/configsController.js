@@ -53,7 +53,6 @@ async function getConfig(req, res) {
 async function createConfig(req, res) {
   const {
     name,
-    description,
     bounding_box_x,
     bounding_box_y,
     pixels,
@@ -69,7 +68,6 @@ async function createConfig(req, res) {
   const config = await prisma.config.create({ 
     data: { 
       name,
-      description,
       bounding_box_x,
       bounding_box_y,
       pixels,
@@ -107,7 +105,6 @@ async function updateConfig(req, res) {
 
   const {
     name,
-    description,
     bounding_box_x,
     bounding_box_y,
     pixels,
@@ -118,7 +115,6 @@ async function updateConfig(req, res) {
 
   const updatedConfig = await prisma.config.update({ where: { id: configId }, data: { 
     name,
-    description,
     bounding_box_x,
     bounding_box_y,
     pixels,

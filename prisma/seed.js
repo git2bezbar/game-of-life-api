@@ -61,7 +61,6 @@ async function main() {
     data: [
       {
         name: 'Glider',
-        description: 'A glider is a pattern that travels across the board. It is the smallest spaceship.',
         bounding_box_x: 3,
         bounding_box_y: 3,
         pixels: '000010010111000',
@@ -70,7 +69,6 @@ async function main() {
       },
       {
         name: 'Blinker',
-        description: 'A blinker is the simplest oscillator.',
         bounding_box_x: 3,
         bounding_box_y: 3,
         pixels: '000000111000000',
@@ -79,7 +77,6 @@ async function main() {
       },
       {
         name: 'Block',
-        description: 'A block is the simplest still life.',
         bounding_box_x: 2,
         bounding_box_y: 2,
         pixels: '0011',
@@ -88,7 +85,6 @@ async function main() {
       },
       {
         name: 'LWSS',
-        description: 'A lightweight spaceship is the second most common spaceship.',
         bounding_box_x: 5,
         bounding_box_y: 4,
         pixels: '000010000100001100011',
