@@ -65,7 +65,6 @@ async function main() {
         bounding_box_y: 3,
         pixels: '000010010111000',
         typeId: 4,
-        userId: 1
       },
       {
         name: 'Blinker',
@@ -73,7 +72,6 @@ async function main() {
         bounding_box_y: 3,
         pixels: '000000111000000',
         typeId: 2,
-        userId: 2
       },
       {
         name: 'Block',
@@ -81,7 +79,6 @@ async function main() {
         bounding_box_y: 2,
         pixels: '0011',
         typeId: 3,
-        userId: 3
       },
       {
         name: 'LWSS',
@@ -89,7 +86,6 @@ async function main() {
         bounding_box_y: 4,
         pixels: '000010000100001100011',
         typeId: 4,
-        userId: 4
       },
     ],
   });
