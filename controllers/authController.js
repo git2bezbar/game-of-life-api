@@ -2,9 +2,7 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 const express = require('express');
-const router = express.Router();
 const jwt = require("jsonwebtoken");
-
 
 /**
   * Connects a user.
@@ -18,8 +16,8 @@ const jwt = require("jsonwebtoken");
   * @throws 401 if the authentication failed.
 */
 async function login(req, res) {
-  const { email, password } = req.body
-  const user = await prisma.user.findUnique({ where: { email, password } })
+  const { username, password } = req.body
+  const user = await prisma.user.findUnique({ where: { username, password } })
 
 	if (user !== null) {
 		const jwtToken = jwt.sign({ username }, process.env.JWT_SECRET, {
