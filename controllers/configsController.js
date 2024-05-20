@@ -51,12 +51,13 @@ async function getConfig(req, res) {
   */
 
 async function createConfig(req, res) {
+  let config
   const {
     name,
     bounding_box_x,
     bounding_box_y,
     pixels,
-    type,
+    typeId,
     period,
     speed,
   } = req.body
@@ -65,18 +66,20 @@ async function createConfig(req, res) {
 
   if (!typeExists) res.status(404).json({ message: "Le type n'existe pas" })
 
-  const config = await prisma.config.create({ 
-    data: { 
-      name,
-      bounding_box_x,
-      bounding_box_y,
-      pixels,
-      type,
-      period,
-      speed,
-    } })
-
-  if (!config) res.status(400).json({ message: "Erreur lors de la création" })
+  try {    
+    config = await prisma.config.create({ 
+      data: { 
+        name,
+        bounding_box_x,
+        bounding_box_y,
+        pixels,
+        typeId,
+        period,
+        speed,
+      } })
+  } catch (error) {
+    res.status(400).json({ message: "Erreur lors de la création" })
+  }
 
   res.status(201).json(config)
 }
@@ -94,36 +97,38 @@ async function createConfig(req, res) {
   */
 
 async function updateConfig(req, res) {
+  let updatedConfig
   const configId = parseInt(req.params.id)
-
-  if (!config) res.status(404).json({ message: "La configuration n'existe pas" })
-
-  const typeExists = await prisma.type.findUnique({ where: { id: type } })
-
-  if (!typeExists) res.status(404).json({ message: "Le type n'existe pas" })
-
   const {
     name,
     bounding_box_x,
     bounding_box_y,
     pixels,
-    type,
+    typeId,
     period,
     speed,
   } = req.body
   const config = await prisma.config.findFirst({ where: { id: configId } })
 
-  const updatedConfig = await prisma.config.update({ where: { id: configId }, data: { 
-    name,
-    bounding_box_x,
-    bounding_box_y,
-    pixels,
-    type,
-    period,
-    speed,
-  } })
+  if (!config) res.status(404).json({ message: "La configuration n'existe pas" })
 
-  if (!updatedConfig) res.status(400).json({ message: "Erreur lors de la mise à jour" })
+  const typeExists = await prisma.type.findFirst({ where: { id: config.typeId } })
+
+  if (!typeExists) res.status(404).json({ message: "Le type n'existe pas" })
+
+  try {
+    updatedConfig = await prisma.config.update({ where: { id: configId }, data: { 
+      name,
+      bounding_box_x,
+      bounding_box_y,
+      pixels,
+      typeId,
+      period,
+      speed,
+    } })
+  } catch (error) {
+    res.status(400).json({ message: "Erreur lors de la mise à jour" })
+  }
 
   res.status(200).json(updatedConfig)
 }
@@ -150,7 +155,7 @@ async function deleteConfig(req, res) {
 
   if (!deletedConfig) res.status(400).json({ message: "Erreur lors de la suppression" })
 
-  res.status(200).json(config)
+  res.status(200).json(deletedConfig)
 }
 
 module.exports = {
