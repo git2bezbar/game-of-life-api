@@ -5,6 +5,7 @@ async function main() {
 
   await prisma.type.deleteMany({})
   await prisma.user.deleteMany({})
+  await prisma.config.deleteMany({})
 
   await prisma.user.createMany({
     data: [
@@ -52,6 +53,47 @@ async function main() {
       {
         name: 'Spaceships',
         description: 'A spaceship is a finite pattern that reappears (without additions or losses) after a fixed number of generations displaced by a non-zero amount.'
+      },
+    ],
+  });
+
+  await prisma.config.createMany({
+    data: [
+      {
+        name: 'Glider',
+        description: 'A glider is a pattern that travels across the board. It is the smallest spaceship.',
+        bounding_box_x: 3,
+        bounding_box_y: 3,
+        pixels: '000010010111000',
+        typeId: 4,
+        userId: 1
+      },
+      {
+        name: 'Blinker',
+        description: 'A blinker is the simplest oscillator.',
+        bounding_box_x: 3,
+        bounding_box_y: 3,
+        pixels: '000000111000000',
+        typeId: 2,
+        userId: 2
+      },
+      {
+        name: 'Block',
+        description: 'A block is the simplest still life.',
+        bounding_box_x: 2,
+        bounding_box_y: 2,
+        pixels: '0011',
+        typeId: 3,
+        userId: 3
+      },
+      {
+        name: 'LWSS',
+        description: 'A lightweight spaceship is the second most common spaceship.',
+        bounding_box_x: 5,
+        bounding_box_y: 4,
+        pixels: '000010000100001100011',
+        typeId: 4,
+        userId: 4
       },
     ],
   });
