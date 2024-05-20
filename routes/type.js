@@ -8,10 +8,12 @@ const {
   deleteType
 } = require("../controllers/typesController");
 
+const auth = require("../middlewares/auth");
+
 router.get("/", getAllTypes);
-router.post("/", createType);
 router.get("/:id", getType);
-router.put("/:id", updateType);
-router.delete("/:id", deleteType);
+router.post("/", auth, createType);
+router.put("/:id", auth, updateType);
+router.delete("/:id", auth, deleteType);
 
 module.exports = router;

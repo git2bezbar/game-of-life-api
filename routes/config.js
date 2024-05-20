@@ -8,10 +8,12 @@ const {
   deleteConfig
 } = require("../controllers/configsController");
 
+const auth = require("../middlewares/auth");
+
 router.get("/", getAllConfigs);
-router.post("/", createConfig);
 router.get("/:id", getConfig);
-router.put("/:id", updateConfig);
-router.delete("/:id", deleteConfig);
+router.post("/", auth, createConfig);
+router.put("/:id", auth, updateConfig);
+router.delete("/:id", auth, deleteConfig);
 
 module.exports = router;
