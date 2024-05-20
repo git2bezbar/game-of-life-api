@@ -35,8 +35,8 @@ model Config {
 	name            String   @unique
 	period          String?
 	speed           String?
-  bounding_box_x  String
-  bounding_box_y  String
+  bounding_box_x  Int
+  bounding_box_y  Int
 	pixels          String
   type            Type     @relation(fields: [typeId], references: [id])
   typeId          Int
