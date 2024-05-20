@@ -31,7 +31,7 @@ async function getAllConfigs(req, res) {
 
 async function getConfig(req, res) {
   const configId = parseInt(req.params.id)
-  const config = await prisma.config.findUnique({ where: { id: configId } })
+  const config = await prisma.config.findFirst({ where: { id: configId } })
 
   if (!config) res.status(404).json({ message: "La configuration n'existe pas" })
 
@@ -61,7 +61,7 @@ async function createConfig(req, res) {
     speed,
   } = req.body
 
-  const typeExists = await prisma.type.findUnique({ where: { id: type } })
+  const typeExists = await prisma.type.findFirst({ where: { id: typeId } })
 
   if (!typeExists) res.status(404).json({ message: "Le type n'existe pas" })
 
@@ -95,7 +95,6 @@ async function createConfig(req, res) {
 
 async function updateConfig(req, res) {
   const configId = parseInt(req.params.id)
-  const config = await prisma.config.findUnique({ where: { id: configId } })
 
   if (!config) res.status(404).json({ message: "La configuration n'existe pas" })
 
@@ -112,6 +111,7 @@ async function updateConfig(req, res) {
     period,
     speed,
   } = req.body
+  const config = await prisma.config.findFirst({ where: { id: configId } })
 
   const updatedConfig = await prisma.config.update({ where: { id: configId }, data: { 
     name,
@@ -142,7 +142,7 @@ async function updateConfig(req, res) {
 
 async function deleteConfig(req, res) {
   const configId = parseInt(req.params.id)
-  const config = await prisma.config.findUnique({ where: { id: configId } })
+  const config = await prisma.config.findFirst({ where: { id: configId } })
 
   if (!config) res.status(404).json({ message: "La configuration n'existe pas" })
 

@@ -30,7 +30,7 @@ async function getAllTypes(req, res) {
   */
 async function getType(req, res) {
   const typeId = parseInt(req.params.id)
-  const type = await prisma.type.findUnique({ where: { id: typeId } })
+  const type = await prisma.type.findFirst({ where: { id: typeId } })
 
   if (!type) res.status(404).json({ message: "Le type n'existe pas" })
 
@@ -73,7 +73,7 @@ async function createType(req, res) {
 
 async function updateType(req, res) {
   const typeId = parseInt(req.params.id)
-  const type = await prisma.type.update({ where: { id: typeId } })
+  const type = await prisma.type.findFirst({ where: { id: typeId } })
   
   if (!type) res.status(404).json({ message: "Le type n'existe pas" })
     
@@ -100,7 +100,7 @@ async function updateType(req, res) {
 
 async function deleteType(req, res) {
   const typeId = parseInt(req.params.id)
-  const type = await prisma.type.findUnique({ where: { id: typeId } })
+  const type = await prisma.type.findFirst({ where: { id: typeId } })
 
   if (!type) res.status(404).json({ message: "Type introuvable" })
 
