@@ -1,21 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const typeController = require("../controllers/type");
+const {
+  getAllTypes,
+  getType,
+  createType,
+  updateType,
+  deleteType
+} = require("../controllers/typesController");
 
-// Get all
-router.get("/", typeController.list);
-
-// Create
-router.post("/", typeController.create);
-
-// Get one
-router.get("/:id", typeController.read);
-
-// Update one
-router.put("/:id", typeController.update);
-
-
-// Delete one
-router.delete("/:id", typeController.remove);
+router.get("/", getAllTypes);
+router.post("/", createType);
+router.get("/:id", getType);
+router.put("/:id", updateType);
+router.delete("/:id", deleteType);
 
 module.exports = router;
