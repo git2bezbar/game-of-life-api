@@ -3,9 +3,39 @@ const prisma = new PrismaClient()
 
 async function main() {
 
-  const deletedTypes = await prisma.type.deleteMany({})
+  await prisma.type.deleteMany({})
+  await prisma.user.deleteMany({})
 
-  const types = await prisma.type.createMany({
+  await prisma.user.createMany({
+    data: [
+      {
+        username: "leonardPaillet",
+        name: "Léonard",
+        email: "leonard@paillet.dev",
+        password: "leonardPaillet"
+      },
+      { 
+        username: "romainVache",
+        name: "Romain",
+        email: "romain@vache.dev",
+        password: "romainVache"
+      },
+      {
+        username: "julienAuger",
+        name: "Julien",
+        email: "julien@auger.dev",
+        password: "julienAuger"
+      },
+      {
+        username: "ademDuran",
+        name: "Adem",
+        email: "adem@duran.dev",
+        password: "ademDuran"
+      },
+    ]
+  });
+  
+  await prisma.type.createMany({
     data: [
       { 
         name: 'Guns',
