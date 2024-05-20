@@ -50,10 +50,14 @@ async function getType(req, res) {
   */
 
 async function createType(req, res) {
+  let type
   const { name, description } = req.body
-  const type = await prisma.type.create({ data: { name, description } })
-
-  if (!type) res.status(400).json({ message: "Erreur lors de la création" })
+  
+  try {
+    type = await prisma.type.create({ data: { name, description } })
+  } catch (error) {
+    res.status(400).json({ message: "Erreur lors de la création" })
+  }
 
   res.status(201).json(type)
 }
@@ -72,17 +76,21 @@ async function createType(req, res) {
   */
 
 async function updateType(req, res) {
+  let updatedType
   const typeId = parseInt(req.params.id)
   const type = await prisma.type.findFirst({ where: { id: typeId } })
   
   if (!type) res.status(404).json({ message: "Le type n'existe pas" })
     
   const { name, description } = req.body
-  const updatedType = await prisma.type.update({ where: { id: typeId }, data: { name, description } })
 
-  if (!updatedType) res.status(400).json({ message: "Erreur lors de la mise à jour" })
+  try {
+    updatedType = await prisma.type.update({ where: { id: typeId }, data: { name, description } })
+  } catch (error) {   
+    res.status(400).json({ message: "Erreur lors de la mise à jour" })
+  }
 
-  res.status(200).json(type)
+  res.status(200).json(updatedType)
 }
 
 /**
@@ -108,7 +116,7 @@ async function deleteType(req, res) {
 
   if (!deletedType) res.status(400).json({ message: "Erreur lors de la suppression" })
 
-  res.status(200).json(type)
+  res.status(200).json(deletedType)
 }
 
 module.exports = {
