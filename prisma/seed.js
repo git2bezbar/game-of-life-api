@@ -54,7 +54,7 @@ async function main() {
         description: 'A spaceship is a finite pattern that reappears (without additions or losses) after a fixed number of generations displaced by a non-zero amount.'
       },
     ],
-  })
+  });
 }
 
 main()
