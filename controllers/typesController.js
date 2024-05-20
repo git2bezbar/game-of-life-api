@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
   * @param {Object} req - The request object.
   * @param {Object} res - The response object.
   * @returns {JSON} All the types.
-*/
+  */
 
 async function getAllTypes(req, res) {
   const types = await prisma.type.findMany()
@@ -27,7 +27,7 @@ async function getAllTypes(req, res) {
   * @param {Object} res - The response object.
   * @returns {JSON} The provided type.
   * @throws 404 if the typeId is not defined.
-*/
+  */
 async function getType(req, res) {
   const typeId = parseInt(req.params.id)
   const type = await prisma.type.findUnique({ where: { id: typeId } })
@@ -47,7 +47,7 @@ async function getType(req, res) {
   * @param {Object} res - The response object.
   * @returns {JSON} The created type.
   * @throws 400 if the type could not be created.
-*/
+  */
 
 async function createType(req, res) {
   const { name, description } = req.body
@@ -69,7 +69,7 @@ async function createType(req, res) {
   * @returns {JSON} The updated type.
   * @throws 404 if the type does not exist or 400 if the type could not be updated.
   *  
-*/
+  */
 
 async function updateType(req, res) {
   const typeId = parseInt(req.params.id)
@@ -96,7 +96,7 @@ async function updateType(req, res) {
   * @returns {JSON} The deleted type.
   * @throws 404 if the type does not exist or 400 if the type could not be deleted.
   *  
-*/
+  */
 
 async function deleteType(req, res) {
   const typeId = parseInt(req.params.id)
