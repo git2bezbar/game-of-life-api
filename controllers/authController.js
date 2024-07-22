@@ -24,7 +24,7 @@ async function login(req, res) {
 			expiresIn: "1h",
 		});
 
-		res.cookie("jwtToken", jwtToken, { httpOnly: true, secure: true });
+		res.cookie("jwtToken", jwtToken, { httpOnly: true, secure: true, sameSite: "none" });
 		res.json(jwtToken);
 	} else {
 		res.status(401).json({ message: "Authentification échouée." });
